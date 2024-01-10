@@ -10,7 +10,7 @@
             "minimum": 1000},
         "name": {"type": "string"},
         "addr": {"type": "string"},
-        "zip": {"type": "string"}
+        "zip": { "pattern": "[0-9]{5}"}
     },
     "additionalProperties": false,
     "required": [
