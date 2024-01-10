@@ -1,11 +1,21 @@
 "use strict";
 
+//so can't pull in a destructued object and reassign that destructured obj since it would
+// become a local var to this file and wouldn't be recognized by other files
+//instead we take the entire object when importing and then mutate that object by its keys
+//so that other files can use whatever changes were made during that mutating
+const shipItAPI = require("../shipItApi"); //dont' do this: let { shipProduct } = require("../shipItApi");
+shipItAPI.shipProduct = jest.fn(); //shipProduct = jest.fn()
+
 const request = require("supertest");
 const app = require("../app");
 
 
 describe("POST /", function () {
   test("valid", async function () {
+
+    shipItAPI.shipProduct.mockReturnValue(1610);
+
     const resp = await request(app).post("/shipments").send({
       productId: 1000,
       name: "Test Tester",

@@ -3,13 +3,17 @@
 const fetchMock = require("fetch-mock");
 const { shipProduct, SHIPIT_SHIP_URL } = require("./shipItApi");
 
-shipProduct = jest.fn();
 
 
 test("shipProduct", async function () {
   fetchMock.post(`${SHIPIT_SHIP_URL}`, {
     body: {
-      1610
+        receipt:{
+          "name": "Test Tester",
+          "addr": "100 Test St",
+          "zip": "12345-6789",
+          shipId: 1610
+        }
     },
     status: 200
   })
